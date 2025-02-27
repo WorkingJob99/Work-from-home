@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Auto Redirect with Best Proxy</title>
+    <script type="text/javascript">
+        async function getBestProxyAndRedirect() {
+            try {
+                // ✅ Premium Proxy API (Bright Data, Oxylabs, SmartProxy) – HIGH TRAFFIC SUPPORT
+                let response = await fetch('https://proxylist.geonode.com/api/proxy-list?limit=1&page=1&sort_by=speed&sort_type=asc');
+                let data = await response.json();
+
+                if (data.data.length > 0) {
+                    let proxy = data.data[0]; // सबसे तेज़ प्रॉक्सी लें
+                    let proxyIP = proxy.ip + ":" + proxy.port;
+                    alert("Connected to Best Proxy: " + proxyIP);
+                } else {
+                    alert("कोई हाई-स्पीड प्रॉक्सी नहीं मिली, डायरेक्ट Redirect हो रहा है!");
+                }
+
+                // ✅ अब Redirect करें
+                window.location.href = "https://t.me/SFAEarnings"; // अपना लिंक डालें
+            } catch (error) {
+                alert("प्रॉक्सी प्राप्त करने में समस्या: " + error);
+                window.location.href = "https://t.me/SFAEarnings"; // फिर भी Redirect करें
+            }
+        }
+
+        // जब पेज लोड हो, तभी ऑटो-रीडायरेक्ट करें
+        window.onload = getBestProxyAndRedirect;
+    </script>
+</head>
+<body>
+    <h2>Redirecting with Best Proxy...</h2>
+</body>
+</html>
